@@ -16,6 +16,9 @@ from datetime import timedelta
 from django.utils.deprecation import MiddlewareMixin
 from .middleware import SessionTimeoutMiddleware
 
+adr = "http://localhost:6969"
+
+
 def main(request):
     if 'user_id' in request.session:
         if 'last_activity' in request.session and \
@@ -51,7 +54,7 @@ def reg(request):
             password = request.POST['password']
             token = generate_jwt_token(login, password)
 
-            url = f"http://192.168.1.103:8000/reg?token={token}"
+            url = adr + f"/reg?token={token}"
             response = requests.get(url)
             answer = response.text
 
@@ -91,7 +94,7 @@ def auth(request):
             password = request.POST['password']
             token = generate_jwt_token(login, password)
 
-            url = f"http://192.168.1.103:8000/auth?token={token}"
+            url = adr + f"/auth?token={token}"
             response = requests.get(url)
             answer = response.text
 
