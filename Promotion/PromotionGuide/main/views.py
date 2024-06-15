@@ -15,17 +15,15 @@ from django.utils import timezone
 from datetime import timedelta
 from django.utils.deprecation import MiddlewareMixin
 from .middleware import SessionTimeoutMiddleware
+import datetime
 
 adr = "http://localhost:6969"
-
 
 def main(request):
     if 'user_id' in request.session:
         if 'last_activity' in request.session and \
-           request.session.get_expiry() - timezone.now() > timedelta(days=7):
+        datetime.fromtimestamp(request.session.get_decoded().get('expiry')) - timezone.now() > timedelta(days=7):
             return render(request, 'main/index_auth_complete.html')
-        else:
-            return render(request, 'main/index.html')
     else:
         return render(request, 'main/index.html')
 
