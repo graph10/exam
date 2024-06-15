@@ -3,12 +3,12 @@
     <head>
         <meta charset="utf-8">
         <title>АкциоГид</title>
-        <link rel="stylesheet" href="../../static/main/css/account.css">
+        <link rel="stylesheet" href="../../static/main/css/postponed.css">
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet">
         <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-        <script src="../../static/main/js/account.js"></script>
+        <script src="../../static/main/js/postponed.js"></script>
     </head>
     <body id="body">
         <div class="main-content">
@@ -37,20 +37,25 @@
                     </div>
                     <div class="main-content_account-content_data_navigation">
                         <p class="main-content_account-content_data_navigation_title">Страницы</p>
-                        <p class="main-content_account-content_data_navigation_notifications" id="notifications">Уведомления</p>
-                        <a href="/postponed" style="text-decoration: none;">
-                            <p class="main-content_account-content_data_navigation_postponed" id="postponed">Отложенные товары</p>
+                        <a href="/account" style="text-decoration: none;">
+                            <p class="main-content_account-content_data_navigation_notifications" id="notifications">Уведомления</p>
                         </a>
+                        <p class="main-content_account-content_data_navigation_postponed" id="postponed">Отложенные товары</p>
                     </div>
                 </div>
                 <div class="main-content_account-content_sep"></div>
-                <div class="main-content_account-content-notification">
-                    <div class="main-content_account-content-notification_card">
-                        <p class="main-content_account-content-notification_card_title">Личный кабинет</p>
-                        <p>Добро пожаловать! Это ваш личный кабинет, тут вы сможете добавить товары в отложенные, например, 
-                            для того чтобы отслеживать когда на определенный товар появится скидка или станет больше чем в прошлый раз. 
-                            На этой странице личного кабинета в подобных формах вы будете получать уведолмения, например, 
-                            как раз таки о том на какой товар появилась скидка. На этом все, мы рады что вы с нами.</p>
+                <div class="main-content_account-content_catalog">
+                    <div class="main-content_account-content_catalog-cards">
+                        <div class="main-content_account-content_catalog-cards_row">
+                            <div class="main-content_account-content_catalog-cards_row_card"> <p>{{ text }}</p></div>
+                            <div class="main-content_account-content_catalog-cards_row_card">{{ text }}</div>
+                            <div class="main-content_account-content_catalog-cards_row_card">{{ text }}</div>
+                        </div>
+                        <div class="main-content_account-content_catalog-cards_row">
+                            <div class="main-content_account-content_catalog-cards_row_card">{{ text }}</div>
+                            <div class="main-content_account-content_catalog-cards_row_card">{{ text }}</div>
+                            <div class="main-content_account-content_catalog-cards_row_card">{{ text }}</div>
+                        </div>
                     </div>
                 </div>
             </div>

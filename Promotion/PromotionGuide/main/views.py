@@ -11,50 +11,19 @@ import hashlib
 from werkzeug.utils import secure_filename
 from django.http import JsonResponse
 import json
-import re
+from django.utils import timezone
+from datetime import timedelta
+from django.utils.deprecation import MiddlewareMixin
+from .middleware import SessionTimeoutMiddleware
 
 def main(request):
     if 'user_id' in request.session:
-            url = f"http://192.168.1.103:8000/getall?type=alc"
-            response = requests.get(url)
-            data_str = response.text
-            data_dict = json.loads(data_str)
-            first_product = data_dict[0]
-            product_name = first_product['name']
-            product_image_src = first_product['imagefull'][0]['src']
-            products = {product_name, product_image_src}
-            print(products)
-
+        if 'last_activity' in request.session and \
+           request.session.get_expiry() - timezone.now() > timedelta(days=7):
             return render(request, 'main/index_auth_complete.html')
+        else:
+            return render(request, 'main/index.html')
     else:
-        # url = f"http://192.168.1.103:8000/getall?type=alc"
-        # response = requests.get(url)
-        # data = response.text
-        # with open('output.json', 'w', encoding='utf-8') as file:
-        #     json.dump(data, file, ensure_ascii=False, indent=4)
-        # # категории 
-
-        # data = " {products [[{daystitle Осталось <span>14</span> дней} {imagefull [{h 1376} {src https://skidkaonline.ru/img/p/2024/06/517581/58125754-517581-378417182722175285.jpg?t=t1718272291} {w 1024}]} {name Бренди (Коньяк)} {shops_ids [1773]}]"
-
-        # # Регулярное выражение для поиска продуктов
-        # product_pattern = r"\{.*?name\s*(.*?)\s*\}\s*{shops_ids \[\w+\]\s*}.*?daystitle\s*Осталось\s*<span>\d+</span>\s*дней.*?imagefull \[(.*?)\s*{src (.*?)\s*w (\d+)\].+?"
-
-        # print('ДО ПОИСКА ПРОДУКТОВ')
-        # # Поиск всех продуктов
-        # products = re.findall(product_pattern, data)
-        # print("до преобразование результато в словари")
-        # # Преобразование результатов в словари
-        # for product in products:
-        #     name, image_full, src, width = product
-        #     # Удаление лишних пробелов и переносов строк
-        #     name = name.strip()
-        #     image_full = image_full.strip().replace(" ", "")
-        #     src = src.strip()
-        #     width = int(width)
-    
-        # print(f"Название: {name}, Изображение: {image_full}, URL: {src}, Ширина: {width}")
-
-
         return render(request, 'main/index.html')
 
 def reg(request):
@@ -92,7 +61,7 @@ def reg(request):
                 request.session['password'] = password
                 return render(request, 'main/index_auth_complete.html')
             if answer == "такой пользователь уже существует":
-                text = "Такой пользователь уже гарегистрирован. Попробуйте войти в акканут или введите другие данные"
+                text = "Такой пользователь уже зарегистрирован. Попробуйте войти в акканут или введите другие данные"
                 return render(request, 'main/reg.html', {'text': text})
     else:
         return render(request, 'main/reg.html')
@@ -142,3 +111,6 @@ def auth(request):
 
 def account(request):
     return render(request, "main/account.html")
+
+def postponed(request):
+    return render(request, "main/postponed.html")

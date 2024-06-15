@@ -1,9 +1,47 @@
 document.addEventListener('DOMContentLoaded', function() {
-    var loginButton = document.querySelector('.reg-content_btn-auth');
-    if (loginButton) {
-        loginButton.addEventListener('click', function(event) {
-            event.preventDefault();
-            window.location.href = '/auth'; 
+    // const navigationLinks1 = document.querySelectorAll('#registration');
+
+    // navigationLinks1.forEach(link => {
+    //     link.addEventListener('click', function(e) {
+    //         // Предотвращаем стандартное поведение клика
+    //         e.preventDefault();
+
+    //         // Отправляем AJAX-запрос на сервер
+    //         fetch('registration', {
+    //             method: 'GET',
+    //             headers: {
+    //                 'Content-Type': 'text/html'
+    //             }
+    //         })
+    //        .then(response => response.text())
+    //        .then(html => {
+    //             // Заменяем содержимое страницы на полученный HTML-код
+    //             document.querySelector('#body').innerHTML = html;
+    //         })
+    //        .catch(error => console.error('Error fetching content:', error));
+    //     });
+    // });
+
+    const navigationLinks2 = document.querySelectorAll('#auth');
+
+    navigationLinks2.forEach(link => {
+        link.addEventListener('click', function(e) {
+            // Предотвращаем стандартное поведение клика
+            e.preventDefault();
+
+            // Отправляем AJAX-запрос на сервер
+            fetch('auth', {
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'text/html'
+                }
+            })
+           .then(response => response.text())
+           .then(html => {
+                // Заменяем содержимое страницы на полученный HTML-код
+                document.querySelector('#body').innerHTML = html;
+            })
+           .catch(error => console.error('Error fetching content:', error));
         });
-    }
+    });
 });

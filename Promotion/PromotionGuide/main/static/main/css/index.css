@@ -5,7 +5,7 @@ body {
     margin: 0px;
     padding: 0px;
     width: 1440px;
-    height: 2000px;
+    height: auto;
     background-color: #E8E8E8;
     font-family: Inter;
 }
@@ -40,6 +40,13 @@ body {
     align-items: center;
     justify-content: space-between;
     margin-right: 122px;
+}
+.header_links_catalog {
+    color: #000;
+    cursor: default;
+    text-decoration: underline;
+    text-underline-offset: 5px;
+    text-decoration-color: #393781;
 }
 .header_btns {
     width: 471px;
@@ -176,14 +183,12 @@ body {
 
 
 .header_content_account {
-    width: 300px;
-    height: 40px;
-    border-radius: 10px;
-    background-color: #FF9920;
     color: #000;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    transition: all 0.3s ease;
+}
+.header_content_account:hover {
+    color: #FFC548;
+    transform: scale(0.95);
 }
 .header_btns_exit-account {
     width: 160px;
@@ -195,7 +200,12 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
+    transition: all 0.3s ease;
 }
+.header_btns_exit-account:hover {
+    transform: scale(0.95);
+}
+
 
 
 
