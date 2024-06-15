@@ -92,7 +92,7 @@ def auth(request):
             password = request.POST['password']
             token = generate_jwt_token(login, password)
 
-            url = adr + f"/reg?token={token}"
+            url = adr + f"/auth?token={token}"
             response = requests.get(url)
             answer = response.text
 
