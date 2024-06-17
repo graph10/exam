@@ -57,7 +57,7 @@ MIDDLEWARE = [
 
 ROOT_URLCONF = 'PromotionGuide.urls'
 SESSION_ENGINE = 'django.contrib.sessions.backends.file'
-SESSION_FILE_PATH = 'PromotionGuide/sessions'
+SESSION_FILE_PATH = '/var/lib/jenkins/workspace/site_start/Promotion/PromotionGuide/PromotionGuide/sessions'
 
 TEMPLATES = [
     {
