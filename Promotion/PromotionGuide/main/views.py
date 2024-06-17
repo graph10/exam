@@ -139,8 +139,8 @@ def auth(request):
         return render(request, 'main/auth.html')
 
 def account(request):
-    login = 'login' in request.session
-    password = 'password' in request.session
+    login = request.session['login']
+    password = request.session['password']
     return render(request, "main/account.html", {'login': login, 'password': password})
 
 def postponed(request):
