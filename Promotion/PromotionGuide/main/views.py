@@ -35,15 +35,15 @@ def main(request):
         return render(request, 'main/index_auth_complete.html', {'combined_data': combined_data})
     else:
         urls = [
-            {"type": "alc", "url": "http://192.168.1.100:6969/getall"},
-            {"type": "bitovuha", "url": "http://192.168.1.100:6969/getall"},
-            {"type": "candy", "url": "http://192.168.1.100:6969/getall"},
-            {"type": "coffee", "url": "http://192.168.1.100:6969/getall"},
-            {"type": "desert", "url": "http://192.168.1.100:6969/getall"},
-            {"type": "feed", "url": "http://192.168.1.100:6969/getall"},
-            {"type": "meat", "url": "http://192.168.1.100:6969/getall"},
-            {"type": "powder", "url": "http://192.168.1.100:6969/getall"},
-            {"type": "product", "url": "http://192.168.1.100:6969/getall"}
+            {"type": "alc", "url": adr+"/getall"},
+            {"type": "bitovuha", "url": adr+"/getall"},
+            {"type": "candy", "url": adr+"/getall"},
+            {"type": "coffee", "url": adr+"/getall"},
+            {"type": "desert", "url": adr+"/getall"},
+            {"type": "feed", "url": adr+"/getall"},
+            {"type": "meat", "url": adr+"/getall"},
+            {"type": "powder", "url": adr+"/getall"},
+            {"type": "product", "url": adr+"/getall"}
         ]
 
         combined_data = []
