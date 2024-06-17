@@ -1,5 +1,4 @@
 from django.shortcuts import render
-from django.http import HttpResponse
 from django.views.decorators.csrf import csrf_exempt
 import secrets
 import requests
@@ -9,21 +8,31 @@ from django.views.decorators.http import require_POST
 import base64
 import hashlib
 from werkzeug.utils import secure_filename
-from django.http import JsonResponse
 import json
-from django.utils import timezone
-from datetime import timedelta
-from django.utils.deprecation import MiddlewareMixin
-from .middleware import SessionTimeoutMiddleware
-import datetime
-
-adr = "http://localhost:6969"
+from test_json import data
 
 def main(request):
     if 'user_id' in request.session:
-        if 'last_activity' in request.session and \
-        datetime.fromtimestamp(request.session.get_decoded().get('expiry')) - timezone.now() > timedelta(days=7):
-            return render(request, 'main/index_auth_complete.html')
+        urls = [
+            {"type": "alc", "url": "http://192.168.1.100:6969/getall"},
+            {"type": "bitovuha", "url": "http://192.168.1.100:6969/getall"},
+            {"type": "candy", "url": "http://192.168.1.100:6969/getall"},
+            {"type": "coffee", "url": "http://192.168.1.100:6969/getall"},
+            {"type": "desert", "url": "http://192.168.1.100:6969/getall"},
+            {"type": "feed", "url": "http://192.168.1.100:6969/getall"},
+            {"type": "meat", "url": "http://192.168.1.100:6969/getall"},
+            {"type": "powder", "url": "http://192.168.1.100:6969/getall"},
+            {"type": "product", "url": "http://192.168.1.100:6969/getall"}
+        ]
+
+        combined_data = []
+        for item in urls:
+            response = requests.get(item["url"], params={"type": item["type"]})
+            # Предполагаем, что функция data принимает текст ответа и возвращает список словарей
+            products = data(response.text)
+            combined_data.extend(products)
+
+        return render(request, 'main/index_auth_complete.html', {'combined_data': combined_data})
     else:
         return render(request, 'main/index.html')
 
@@ -52,7 +61,7 @@ def reg(request):
             password = request.POST['password']
             token = generate_jwt_token(login, password)
 
-            url = adr + f"/reg?token={token}"
+            url = f"http://192.168.1.100:6969/reg?token={token}"
             response = requests.get(url)
             answer = response.text
 
@@ -92,7 +101,7 @@ def auth(request):
             password = request.POST['password']
             token = generate_jwt_token(login, password)
 
-            url = adr + f"/auth?token={token}"
+            url = f"http://192.168.1.100:6969/auth?token={token}"
             response = requests.get(url)
             answer = response.text
 

@@ -7,6 +7,8 @@
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet">
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+        <script src="../../static/main/js/index.js"></script>
     </head>
     <body>
         <div class="main-content">
@@ -32,23 +34,52 @@
                     Мы помогаем экономить и получать свежую информацию о ценах</p>
             </div>
             <div class="main-content_catalog">
-                <div class="main-content_catalog_filters">
-                    <p>Фильтры</p>
+                <div class="main-content_catalog_all-filters1">
+                    <div class="main-content_catalog_filters1"><p>Фильтры магазинов</p> <img src="../../static/main/img/arrow.svg" alt="arrow" class="main-content_catalog_filters_arrow"></div>
                 </div>
+                <div class="main-content_catalog_filters-hidden1">
+                    <button>Ашан</button>
+                    <button>Метро</button>
+                    <button>Ценник</button>
+                    <button>Корзина</button>
+                    <button>МагазинЧИК</button>
+                    <button>ПУД</button>
+                    <button>Доброцен</button>
+                    <button>ФРЕШ маркет</button>
+                    <button>Мега Яблоко</button>
+                    <button>Яблоко</button>
+                    <button>Продторгъ</button>
+                    <button>Народный Амбар</button>
+                    <button>Чистый Дом</button>
+                    <button>OrangeEVA</button>
+                </div>
+                <div class="main-content_catalog_all-filters2">
+                    <div class="main-content_catalog_filters2"><p>Фильтры типов продуктов</p> <img src="../../static/main/img/arrow.svg" alt="arrow" class="main-content_catalog_filters_arrow"></div>
+                </div>
+                <div class="main-content_catalog_filters-hidden2">
+                    <button>Молочные продукты</button>
+                    <button>Порошки и стирка</button>
+                    <button>Корма</button>
+                    <button>Кофе</button>
+                    <button>Мясная продукция</button>
+                    <button>Бытовые товары</button>
+                    <button>Сладости</button>
+                    <button>Продукты для стирки</button>
+                    <button>Алкоголь</button>
+                </div>
+                {% block content %}
                 <div class="main-content_catalog-cards">
-                    <div class="main-content_catalog-cards_row">
-                        <div class="main-content_catalog-cards_row_card"> <p>{{ text }}</p></div>
-                        <div class="main-content_catalog-cards_row_card">{{ text }}</div>
-                        <div class="main-content_catalog-cards_row_card">{{ text }}</div>
-                        <div class="main-content_catalog-cards_row_card">{{ text }}</div>
+                    {% for days, image, name, shops, type in combined_data %}
+                    <div class="main-content_catalog-cards_card">
+                        <img src="{{ image }}" alt="image" class="main-content_catalog-cards_card_img">
+                        <p id="shop">Магазин: {{ shops }}</p>
+                        <p id="type">Тип продукта: {{ type }}</p>
+                        <p>{{ name }}</p>
+                        <p>{{ days }}</p>
                     </div>
-                    <div class="main-content_catalog-cards_row">
-                        <div class="main-content_catalog-cards_row_card">{{ text }}</div>
-                        <div class="main-content_catalog-cards_row_card">{{ text }}</div>
-                        <div class="main-content_catalog-cards_row_card">{{ text }}</div>
-                        <div class="main-content_catalog-cards_row_card">{{ text }}</div>
-                    </div>
+                    {% endfor %}
                 </div>
+                {% endblock %}
             </div>
             <div class="main-content_btn-continuation"></div>
         </div>
