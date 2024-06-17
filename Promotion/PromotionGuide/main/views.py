@@ -10,19 +10,19 @@ import hashlib
 from werkzeug.utils import secure_filename
 import json
 from test_json import data
-
+adr = "http://localhost:6969"
 def main(request):
     if 'user_id' in request.session:
         urls = [
-            {"type": "alc", "url": "http://192.168.1.100:6969/getall"},
-            {"type": "bitovuha", "url": "http://192.168.1.100:6969/getall"},
-            {"type": "candy", "url": "http://192.168.1.100:6969/getall"},
-            {"type": "coffee", "url": "http://192.168.1.100:6969/getall"},
-            {"type": "desert", "url": "http://192.168.1.100:6969/getall"},
-            {"type": "feed", "url": "http://192.168.1.100:6969/getall"},
-            {"type": "meat", "url": "http://192.168.1.100:6969/getall"},
-            {"type": "powder", "url": "http://192.168.1.100:6969/getall"},
-            {"type": "product", "url": "http://192.168.1.100:6969/getall"}
+            {"type": "alc", "url": adr+"/getall"},
+            {"type": "bitovuha", "url": adr+"/getall"},
+            {"type": "candy", "url": adr+"/getall"},
+            {"type": "coffee", "url": adr+"/getall"},
+            {"type": "desert", "url": adr+"/getall"},
+            {"type": "feed", "url": adr+"/getall"},
+            {"type": "meat", "url": adr+"/getall"},
+            {"type": "powder", "url": adr+"/getall"},
+            {"type": "product", "url": adr+"/getall"}
         ]
 
         combined_data = []
@@ -80,7 +80,7 @@ def reg(request):
             password = request.POST['password']
             token = generate_jwt_token(login, password)
 
-            url = f"http://192.168.1.100:6969/reg?token={token}"
+            url = adr + f"/reg?token={token}"
             response = requests.get(url)
             answer = response.text
 
@@ -120,7 +120,7 @@ def auth(request):
             password = request.POST['password']
             token = generate_jwt_token(login, password)
 
-            url = f"http://192.168.1.100:6969/auth?token={token}"
+            url = adr + f"/auth?token={token}"
             response = requests.get(url)
             answer = response.text
 
